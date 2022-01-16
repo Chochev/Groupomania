@@ -27,7 +27,7 @@ exports.signup = (req, res, next) => {
     })
     .catch((error) => res.status(500).json(error));
 };
-//avatar image
+
 exports.setAvatar = (req, res, next) => {
   console.log(req);
   // TODO: handle db update... (req.file.filename) `${req.file/destination}/${req.file.filename}`
