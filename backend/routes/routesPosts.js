@@ -18,7 +18,7 @@ try{
  
     router.get('/:id/comments', auth, postsCtrl.getComments);
     router.post('/:id/comments', auth, postsCtrl.createComment);
-    router.put('/:id/comments', auth, postsCtrl.updateComment);
+    router.put('/comments/:id', auth, postsCtrl.updateComment);
     router.delete('/comments/:id', auth, postsCtrl.deleteComment); 
 
 }catch (error){
