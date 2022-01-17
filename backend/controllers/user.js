@@ -29,7 +29,20 @@ exports.signup = (req, res, next) => {
 };
 
 exports.setAvatar = (req, res, next) => {
-  console.log(req);
+  //console.log(req);
+  const token = req.headers.authorization.split(" ")[1];
+  const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+  const userId = decodedToken.userId;
+  let avatar = req.body.avatar;
+  let sqlInserts = [avatar, userId];
+  userManager
+    .setAvatar(sqlInserts)
+    .then((response) => {
+      res.status(200).json(JSON.stringify(response));
+    })
+    .catch((error) => {
+      res.status(400).json(error);
+    });
   // TODO: handle db update... (req.file.filename) `${req.file/destination}/${req.file.filename}`
 };
 
