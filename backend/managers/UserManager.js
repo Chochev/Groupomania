@@ -55,7 +55,7 @@ class UserManager {
         })
     }
     seeMyProfile(sqlInserts){
-        let sql = 'SELECT firstName, lastName, email FROM users WHERE id = ?';
+        let sql = 'SELECT firstName, lastName, email, avatarUrl  FROM users WHERE id = ?';
         sql = mysql.format(sql,sqlInserts);
         return new Promise((resolve, reject) =>{
             connectdb.query(sql, function(err, result){
@@ -66,6 +66,20 @@ class UserManager {
         })
     
     }
+    //avatar
+    
+    setAvatar(sqlInserts){
+        let sql = "UPDATE users SET avatarUrl = ? WHERE id = ?";
+        sql = mysql.format(sql,sqlInserts);
+        return new Promise((resolve, reject) =>{
+            connectdb.query(sql, function(err, result){
+                if (err) return reject({error : 'fonction indisponible'});
+                resolve({message : 'Informations mises à jour !'});
+            }) 
+
+        })
+    }
+
     updateUser(sqlInserts){
         let sql = 'UPDATE users SET firstName = ?, lastName = ?, email = ? WHERE id = ?';
         sql = mysql.format(sql,sqlInserts);
