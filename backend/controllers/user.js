@@ -28,22 +28,41 @@ exports.signup = (req, res, next) => {
     .catch((error) => res.status(500).json(error));
 };
 
+// exports.setAvatar = (req, res, next) => {
+//   console.log(req.file.filename);
+//   const token = req.headers.authorization.split(" ")[1];
+//   const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+//   const userId = decodedToken.userId;
+//   let avatar = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
+// //  //let avatar = 'http://localhost:3000/images/' + req.file.filename;
+// //   // let avatar = `${req.file/images}/${req.file.filename}`;
+//   let sqlInserts = [avatar, userId];
+//   userManager
+//     .setAvatar(sqlInserts)
+//     .then((response) => {
+//       res.status(200).json(JSON.stringify(response));
+//     })
+//     .catch((error) => {
+//       res.status(400).json(error);
+//     });
+//   // TODO: handle db update... (req.file.filename) `${req.file/destination}/${req.file.filename}`
+// };
+
 exports.setAvatar = (req, res, next) => {
-  //console.log(req);
+  console.log(req.file.filename);
   const token = req.headers.authorization.split(" ")[1];
-  const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
-  const userId = decodedToken.userId;
-  let avatar = req.body.avatar;
+    const decodedToken = jwt.verify(token, "RANDOM_TOKEN_SECRET");
+    const userId = decodedToken.userId;
+  let avatar = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
   let sqlInserts = [avatar, userId];
-  userManager
-    .setAvatar(sqlInserts)
-    .then((response) => {
-      res.status(200).json(JSON.stringify(response));
-    })
-    .catch((error) => {
-      res.status(400).json(error);
-    });
-  // TODO: handle db update... (req.file.filename) `${req.file/destination}/${req.file.filename}`
+    userManager
+      .setAvatar(sqlInserts)
+      .then((response) => {
+        res.status(200).json(JSON.stringify(response));
+      })
+      .catch((error) => {
+        res.status(400).json(error);
+      });
 };
 
 exports.login = (req, res, next) => {
