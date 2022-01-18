@@ -17,7 +17,7 @@ app.use((req, res, next) => {
     next();
 });
 
-//app.use("/images",express.static(path.join(__dirname, "images")));
+app.use("/images",express.static(path.join(__dirname, "images")));
 app.use('/api/posts', routesPosts);
 app.use('/api/auth', routesUsers);
 app.use('/api/moderation', routesMod);
